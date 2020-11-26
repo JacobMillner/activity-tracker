@@ -1,7 +1,7 @@
 # Activity Tracker
 
 # Table of Contents
-- [Documentation](docs/README.md))
+- [Documentation](docs/README.md)
 - [Introduction](#introduction)
 
 ## Introduction
