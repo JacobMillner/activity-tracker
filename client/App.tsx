@@ -1,23 +1,9 @@
 import React, { useState } from 'react';
-import {
-  AccessibilityRole,
-  ImageProps,
-  ImageStyle,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text as RNText,
-} from 'react-native';
-import {
-  ApplicationProvider,
-  Button,
-  Icon,
-  IconRegistry,
-  Layout,
-  Text,
-} from '@ui-kitten/components';
+import { StyleSheet, Text as RNText } from 'react-native';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { mapping, light, dark } from '@eva-design/eva';
+import Home from './components/home';
 
 const themes = {
   light: {
@@ -40,14 +26,11 @@ const App = (): React.ReactFragment => {
     setThemeName(themeName === 'light' ? 'dark' : 'light');
   };
 
-  const { text: themeButtonText, icon: themeButtonIcon } =
-    themeName === 'light' ? themes.dark : themes.light;
-
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider mapping={mapping} theme={theme}>
-        
+        <Home themeName={themeName} changeTheme={changeTheme} themes={themes} />
       </ApplicationProvider>
     </>
   );

@@ -1,6 +1,8 @@
 import React from 'react';
+import { AccessibilityRole, ImageStyle, Text as RNText } from 'react-native';
+import { Button, Icon } from '@ui-kitten/components';
 
-type CustomButtonWithIconProps = {
+type ButtonIconProps = {
   accessibilityRole: AccessibilityRole;
   accessibilityLabel: string;
   icon: string;
@@ -10,7 +12,16 @@ type CustomButtonWithIconProps = {
   style: any;
 };
 
-const CustomButtonWithIcon = ({
+type IconProps = {
+  name: string;
+  style?: ImageStyle;
+};
+
+const renderIcon = ({ name, style }: IconProps) => (
+  <Icon {...style} name={name} />
+);
+
+const ButtonIcon = ({
   accessibilityRole,
   accessibilityLabel,
   icon,
@@ -18,7 +29,7 @@ const CustomButtonWithIcon = ({
   onPress,
   text,
   style,
-}: CustomButtonWithIconProps) => {
+}: ButtonIconProps) => {
   const ButtonIcon = () => renderIcon({ name: icon, style: iconStyle });
   return (
     <Button
@@ -31,3 +42,5 @@ const CustomButtonWithIcon = ({
     </Button>
   );
 };
+
+export default ButtonIcon;

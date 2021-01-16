@@ -2,24 +2,21 @@ import React, { useState } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
-  ImageStyle,
   View,
   Text as RNText,
 } from 'react-native';
 import { Button, Layout, Icon, Text } from '@ui-kitten/components';
+import ButtonIcon from '../button-icon';
 
 const heartIcons = ['😻', '💖', '😍', '🥰', '😍', '💝', '😘', '💓', '💕', '🐱'];
 
-type IconProps = {
-  name: string;
-  style?: ImageStyle;
+type HomeProps = {
+  themeName: string;
+  changeTheme: Function;
+  themes: object;
 };
 
-const renderIcon = ({ name, style }: IconProps) => (
-  <Icon {...style} name={name} />
-);
-
-const home = (): React.ReactFragment => {
+const Home = ({ themeName, changeTheme, themes }: HomeProps) => {
   const [icon, setIcon] = useState(heartIcons[0]);
 
   const changeIcon = () => {
@@ -27,16 +24,19 @@ const home = (): React.ReactFragment => {
     setIcon(heartIcons[index]);
   };
 
+  const { text: themeButtonText, icon: themeButtonIcon } =
+    themeName === 'light' ? themes.dark : themes.light;
+
   return (
     <Layout style={styles.container}>
       <Text style={styles.text} category="h1">
         Welcome to Activity Tracker {icon}
       </Text>
       <Text style={styles.text} category="s1">
-        It works great in the browser and as a native app!
+        Track all of your activites!
       </Text>
       <Text style={styles.text} appearance="hint">
-        Click some buttons to see it working.
+        Test buttons!
       </Text>
       <Button
         accessibilityRole="button"
@@ -45,7 +45,7 @@ const home = (): React.ReactFragment => {
         onPress={changeIcon}>
         CHANGE ICON
       </Button>
-      <CustomButtonWithIcon
+      <ButtonIcon
         accessibilityRole="button"
         accessibilityLabel="UI Kitten Change Theme"
         style={styles.iconButton}
@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Home;
