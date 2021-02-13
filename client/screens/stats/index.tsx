@@ -1,13 +1,17 @@
 import React from 'react';
 import { Button, View, Text } from 'react-native';
 
-const StatsScreen = (navigation: any) => {
-  const navHome = () => navigation.navigate('Home');
+interface StatsProps {
+  navigation: any;
+}
+
+const StatsScreen = ({ navigation }: StatsProps) => {
+  const navBack = () => navigation.goBack();
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Stats Screen</Text>
-      <Button title="Home" onPress={navHome} />
+      <Button title="Back" onPress={navBack} />
     </View>
   );
 };
