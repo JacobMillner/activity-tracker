@@ -1,7 +1,8 @@
 export interface SaveData {
   User: User;
   Subjects: Array<Subject>;
-  DataVersion: String
+  Theme: String;
+  DataVersion: String;
 }
 
 export interface User {

@@ -1,11 +1,15 @@
+import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { StyleSheet, Text as RNText } from 'react-native';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { mapping, light, dark } from '@eva-design/eva';
-import Home from './components/home';
+import Home from './screens/home';
+import StatsScreen from './screens/stats';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const themes = {
+const themes: any = {
   light: {
     theme: light,
     icon: 'sun',
@@ -21,6 +25,7 @@ const themes = {
 const App = (): React.ReactFragment => {
   const [themeName, setThemeName] = useState('dark');
   const theme: any = themes[themeName].theme;
+  const Stack = createStackNavigator();
 
   const changeTheme = () => {
     setThemeName(themeName === 'light' ? 'dark' : 'light');
@@ -28,10 +33,24 @@ const App = (): React.ReactFragment => {
 
   return (
     <>
-      <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider mapping={mapping} theme={theme}>
-        <Home themeName={themeName} changeTheme={changeTheme} themes={themes} />
-      </ApplicationProvider>
+      <NavigationContainer>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider mapping={mapping} theme={theme}>
+          <Stack.Navigator>
+            <Stack.Screen name="Home">
+              {(props) => (
+                <Home
+                  {...props}
+                  themeName={themeName}
+                  changeTheme={changeTheme}
+                  themes={themes}
+                />
+              )}
+            </Stack.Screen>
+            <Stack.Screen name="Stats" component={StatsScreen} />
+          </Stack.Navigator>
+        </ApplicationProvider>
+      </NavigationContainer>
     </>
   );
 };

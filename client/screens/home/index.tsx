@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text as RNText,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button, Layout, Icon, Text } from '@ui-kitten/components';
-import ButtonIcon from '../button-icon';
+import ButtonIcon from '../../components/button-icon';
 
 const heartIcons = ['😻', '💖', '😍', '🥰', '😍', '💝', '😘', '💓', '💕', '🐱'];
 
 type HomeProps = {
   themeName: string;
-  changeTheme: Function;
-  themes: object;
+  changeTheme: () => void;
+  themes: any;
+  navigation: any;
 };
 
-const Home = ({ themeName, changeTheme, themes }: HomeProps) => {
+const Home = ({ themeName, changeTheme, themes, navigation }: HomeProps) => {
   const [icon, setIcon] = useState(heartIcons[0]);
 
   const changeIcon = () => {
     const index = Math.floor(Math.random() * heartIcons.length);
     setIcon(heartIcons[index]);
   };
+
+  const navStats = () => navigation.navigate('Stats');
 
   const { text: themeButtonText, icon: themeButtonIcon } =
     themeName === 'light' ? themes.dark : themes.light;
@@ -47,21 +45,22 @@ const Home = ({ themeName, changeTheme, themes }: HomeProps) => {
       </Button>
       <ButtonIcon
         accessibilityRole="button"
-        accessibilityLabel="UI Kitten Change Theme"
+        accessibilityLabel="Change Theme"
         style={styles.iconButton}
         text={`SWITCH TO ${themeButtonText} THEME`}
         icon={themeButtonIcon}
         onPress={changeTheme}
         iconStyle={{ tintColor: 'white' }}
       />
-      <TouchableOpacity
+      <ButtonIcon
         accessibilityRole="button"
-        accessibilityLabel="Native Change Theme"
-        onPress={changeTheme}>
-        <View style={styles.nativeButton}>
-          <RNText>NATIVE CHANGE THEME</RNText>
-        </View>
-      </TouchableOpacity>
+        accessibilityLabel="UI Kitten Change Theme"
+        style={styles.iconButton}
+        text={'Stats Screen'}
+        icon={themeButtonIcon}
+        onPress={navStats}
+        iconStyle={{ tintColor: 'white' }}
+      />
     </Layout>
   );
 };
