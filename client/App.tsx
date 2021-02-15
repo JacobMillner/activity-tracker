@@ -5,9 +5,14 @@ import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { mapping, light, dark } from '@eva-design/eva';
 import Home from './screens/home';
+import AddActivity from './screens/add-activity';
 import StatsScreen from './screens/stats';
+import SelectActivityScreen from './screens/select-activity';
+import SettingsScreen from './screens/settings';
+import SetupScreen from './screens/setup';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import AddActivityScreen from './screens/add-activity';
 
 const themes: any = {
   light: {
@@ -47,6 +52,13 @@ const App = (): React.ReactFragment => {
                 />
               )}
             </Stack.Screen>
+            <Stack.Screen name="Stats" component={StatsScreen} />
+            <Stack.Screen name="AddActivity" component={AddActivityScreen} />
+            <Stack.Screen
+              name="SelectActivity"
+              component={SelectActivityScreen}
+            />
+            <Stack.Screen name="Setup" component={SetupScreen} />
             <Stack.Screen name="Stats" component={StatsScreen} />
           </Stack.Navigator>
         </ApplicationProvider>

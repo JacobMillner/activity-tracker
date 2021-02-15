@@ -1,15 +1,25 @@
 export interface SaveData {
   User: User;
-  Subjects: Array<Subject>;
-  Theme: String;
+  Activities: Array<Activity>;
+  Settings: Settings;
   DataVersion: String;
 }
 
 export interface User {
-  username: String;
+  Username: String;
 }
 
-export interface Subject {
+export interface Settings {
+  Theme: String;
+}
+
+export interface Tracker {
+  Tracking: Boolean;
+  StartTime: Number;
+  SelectedActivity: Number;
+}
+
+export interface Activity {
   id: Number;
   Name: String;
   TotalTime: Number;

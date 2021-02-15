@@ -21,6 +21,9 @@ const Home = ({ themeName, changeTheme, themes, navigation }: HomeProps) => {
   };
 
   const navStats = () => navigation.navigate('Stats');
+  const navAddActivity = () => navigation.navigate('AddActivity');
+  const navSelectActivity = () => navigation.navigate('SelectActivity');
+  const navSettings = () => navigation.navigate('Settings');
 
   const { text: themeButtonText, icon: themeButtonIcon } =
     themeName === 'light' ? themes.dark : themes.light;
@@ -54,11 +57,38 @@ const Home = ({ themeName, changeTheme, themes, navigation }: HomeProps) => {
       />
       <ButtonIcon
         accessibilityRole="button"
-        accessibilityLabel="UI Kitten Change Theme"
+        accessibilityLabel="Stats Screen"
         style={styles.iconButton}
         text={'Stats Screen'}
         icon={themeButtonIcon}
         onPress={navStats}
+        iconStyle={{ tintColor: 'white' }}
+      />
+      <ButtonIcon
+        accessibilityRole="button"
+        accessibilityLabel="Add Activity"
+        style={styles.iconButton}
+        text={'Add Activity'}
+        icon={themeButtonIcon}
+        onPress={navAddActivity}
+        iconStyle={{ tintColor: 'white' }}
+      />
+      <ButtonIcon
+        accessibilityRole="button"
+        accessibilityLabel="Select Activity"
+        style={styles.iconButton}
+        text={'Select Activity'}
+        icon={themeButtonIcon}
+        onPress={navSelectActivity}
+        iconStyle={{ tintColor: 'white' }}
+      />
+      <ButtonIcon
+        accessibilityRole="button"
+        accessibilityLabel="Settings"
+        style={styles.iconButton}
+        text={'Settings'}
+        icon={themeButtonIcon}
+        onPress={navSettings}
         iconStyle={{ tintColor: 'white' }}
       />
     </Layout>
