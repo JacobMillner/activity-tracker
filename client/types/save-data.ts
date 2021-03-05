@@ -1,28 +1,38 @@
 export interface SaveData {
-  User: User;
-  Activities: Array<Activity>;
-  Settings: Settings;
-  DataVersion: String;
+  user: User;
+  activities: Array<Activity>;
+  settings: Settings;
+  dataVersion: String;
 }
 
 export interface User {
-  Username: String;
+  username: String;
 }
 
 export interface Settings {
-  Theme: String;
+  theme: String;
 }
 
 export interface Tracker {
-  Tracking: Boolean;
-  StartTime: Number;
-  SelectedActivity: Number;
+  tracking: Boolean;
+  startTime: Number;
+  selectedActivity: Number;
 }
 
 export interface Activity {
   id: Number;
-  Name: String;
-  TotalTime: Number;
-  TimeThisWeek: Number;
-  LastTrackedDate: Number;
+  name: String;
+  totalTime: Number;
+  timeThisWeek: Number;
+  LlastTrackedDate: Number;
+}
+
+export interface ActivityEntries {
+  entries: Array<ActivityEntry>;
+}
+
+export interface ActivityEntry {
+  date: Number;
+  activity: String;
+  duration: Number;
 }
