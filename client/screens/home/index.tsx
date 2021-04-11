@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Layout, Icon, Text } from '@ui-kitten/components';
+import { Button, Layout, Text } from '@ui-kitten/components';
 import ButtonIcon from '../../components/button-icon';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SaveData } from '../../types/save-data';
 
 const heartIcons = ['😻', '💖', '😍', '🥰', '😍', '💝', '😘', '💓', '💕', '🐱'];
 
@@ -14,6 +16,12 @@ type HomeProps = {
 
 const Home = ({ themeName, changeTheme, themes, navigation }: HomeProps) => {
   const [icon, setIcon] = useState(heartIcons[0]);
+  const [userName, setUserName] = useState<string>('');
+
+  useEffect(() => {
+    // on load grab user settings
+    getSaveData();
+  }, []);
 
   const changeIcon = () => {
     const index = Math.floor(Math.random() * heartIcons.length);
@@ -25,13 +33,26 @@ const Home = ({ themeName, changeTheme, themes, navigation }: HomeProps) => {
   const navSelectActivity = () => navigation.navigate('SelectActivity');
   const navSettings = () => navigation.navigate('Settings');
 
+  const getSaveData = async () => {
+    // TODO: move this to context
+    try {
+      const jsonData: string | null = await AsyncStorage.getItem('save-data');
+      if (jsonData !== null) {
+        const data: SaveData = JSON.parse(jsonData);
+        setUserName(data.user.username);
+      }
+    } catch (e) {
+      console.error('Error loading save data. ', e);
+    }
+  };
+
   const { text: themeButtonText, icon: themeButtonIcon } =
     themeName === 'light' ? themes.dark : themes.light;
 
   return (
     <Layout style={styles.container}>
       <Text style={styles.text} category="h1">
-        Welcome to Activity Tracker {icon}
+        Welcome to Activity Tracker {userName}! {icon}
       </Text>
       <Text style={styles.text} category="s1">
         Track all of your activites!
