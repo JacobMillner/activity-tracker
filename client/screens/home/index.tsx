@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import { Button, Layout, Text } from '@ui-kitten/components';
 import ButtonIcon from '../../components/button-icon';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { SaveData } from '../../types/save-data';
 
 const heartIcons = ['😻', '💖', '😍', '🥰', '😍', '💝', '😘', '💓', '💕', '🐱'];
 
@@ -21,7 +20,7 @@ const Home = ({ themeName, changeTheme, themes, navigation }: HomeProps) => {
   useEffect(() => {
     // on load grab user settings
     getSaveData();
-  }, []);
+  });
 
   const changeIcon = () => {
     const index = Math.floor(Math.random() * heartIcons.length);
@@ -39,7 +38,7 @@ const Home = ({ themeName, changeTheme, themes, navigation }: HomeProps) => {
       const jsonData: string | null = await AsyncStorage.getItem('save-data');
       if (jsonData !== null) {
         const data: SaveData = JSON.parse(jsonData);
-        setUserName(data.user.username);
+        if (data?.user) setUserName(data.user.username);
       }
     } catch (e) {
       console.error('Error loading save data. ', e);
@@ -72,45 +71,35 @@ const Home = ({ themeName, changeTheme, themes, navigation }: HomeProps) => {
         accessibilityLabel="Change Theme"
         style={styles.iconButton}
         text={`SWITCH TO ${themeButtonText} THEME`}
-        icon={themeButtonIcon}
         onPress={changeTheme}
-        iconStyle={{ tintColor: 'white' }}
       />
       <ButtonIcon
         accessibilityRole="button"
         accessibilityLabel="Stats Screen"
         style={styles.iconButton}
         text={'Stats Screen'}
-        icon={themeButtonIcon}
         onPress={navStats}
-        iconStyle={{ tintColor: 'white' }}
       />
       <ButtonIcon
         accessibilityRole="button"
         accessibilityLabel="Add Activity"
         style={styles.iconButton}
         text={'Add Activity'}
-        icon={themeButtonIcon}
         onPress={navAddActivity}
-        iconStyle={{ tintColor: 'white' }}
       />
       <ButtonIcon
         accessibilityRole="button"
         accessibilityLabel="Select Activity"
         style={styles.iconButton}
         text={'Select Activity'}
-        icon={themeButtonIcon}
         onPress={navSelectActivity}
-        iconStyle={{ tintColor: 'white' }}
       />
       <ButtonIcon
         accessibilityRole="button"
         accessibilityLabel="Settings"
         style={styles.iconButton}
         text={'Settings'}
-        icon={themeButtonIcon}
         onPress={navSettings}
-        iconStyle={{ tintColor: 'white' }}
       />
     </Layout>
   );

@@ -1,25 +1,24 @@
-export interface SaveData {
+interface SaveData {
   user?: User;
   activities?: array<Activity>;
   settings?: Settings;
   dataVersion?: string;
 }
-
-export interface User {
+interface User {
   username: string;
 }
 
-export interface Settings {
+interface Settings {
   theme: String;
 }
 
-export interface Tracker {
+interface Tracker {
   tracking: boolean;
   startTime: number;
   selectedActivity: number;
 }
 
-export interface Activity {
+interface Activity {
   id: number;
   name: string;
   totalTime: number;
@@ -27,11 +26,11 @@ export interface Activity {
   LlastTrackedDate: number;
 }
 
-export interface ActivityEntries {
+interface ActivityEntries {
   entries: array<ActivityEntry>;
 }
 
-export interface ActivityEntry {
+interface ActivityEntry {
   date: number;
   activity: string;
   duration: number;
